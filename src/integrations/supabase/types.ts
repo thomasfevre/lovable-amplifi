@@ -14,7 +14,228 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      creators: {
+        Row: {
+          banner_url: string | null
+          created_at: string | null
+          current_price: number | null
+          holder_count: number | null
+          id: string
+          market_cap: number | null
+          profile_id: string
+          token_name: string
+          token_symbol: string
+          total_supply: number | null
+        }
+        Insert: {
+          banner_url?: string | null
+          created_at?: string | null
+          current_price?: number | null
+          holder_count?: number | null
+          id?: string
+          market_cap?: number | null
+          profile_id: string
+          token_name: string
+          token_symbol: string
+          total_supply?: number | null
+        }
+        Update: {
+          banner_url?: string | null
+          created_at?: string | null
+          current_price?: number | null
+          holder_count?: number | null
+          id?: string
+          market_cap?: number | null
+          profile_id?: string
+          token_name?: string
+          token_symbol?: string
+          total_supply?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "creators_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          content: string
+          created_at: string | null
+          id: string
+          is_read: boolean | null
+          recipient_id: string
+          sender_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          recipient_id: string
+          sender_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          recipient_id?: string
+          sender_id?: string
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_read: boolean | null
+          message: string
+          title: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          message: string
+          title: string
+          type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          message?: string
+          title?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      posts: {
+        Row: {
+          comments_count: number | null
+          content: string
+          created_at: string | null
+          creator_id: string
+          id: string
+          image_url: string | null
+          is_locked: boolean | null
+          likes_count: number | null
+          unlock_token_amount: number | null
+        }
+        Insert: {
+          comments_count?: number | null
+          content: string
+          created_at?: string | null
+          creator_id: string
+          id?: string
+          image_url?: string | null
+          is_locked?: boolean | null
+          likes_count?: number | null
+          unlock_token_amount?: number | null
+        }
+        Update: {
+          comments_count?: number | null
+          content?: string
+          created_at?: string | null
+          creator_id?: string
+          id?: string
+          image_url?: string | null
+          is_locked?: boolean | null
+          likes_count?: number | null
+          unlock_token_amount?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "posts_creator_id_fkey"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "creators"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string | null
+          display_name: string | null
+          id: string
+          is_creator: boolean | null
+          updated_at: string | null
+          username: string | null
+          wallet_address: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          id: string
+          is_creator?: boolean | null
+          updated_at?: string | null
+          username?: string | null
+          wallet_address: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          id?: string
+          is_creator?: boolean | null
+          updated_at?: string | null
+          username?: string | null
+          wallet_address?: string
+        }
+        Relationships: []
+      }
+      token_holdings: {
+        Row: {
+          amount: number
+          created_at: string | null
+          creator_id: string
+          id: string
+          purchase_price: number
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          amount?: number
+          created_at?: string | null
+          creator_id: string
+          id?: string
+          purchase_price: number
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          creator_id?: string
+          id?: string
+          purchase_price?: number
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "token_holdings_creator_id_fkey"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "creators"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

@@ -13,6 +13,7 @@ import Holdings from "./pages/Holdings";
 import Notifications from "./pages/Notifications";
 import Profile from "./pages/Profile";
 import CreatorProfile from "./pages/CreatorProfile";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/holdings" element={<Holdings />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/creator/:id" element={<CreatorProfile />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

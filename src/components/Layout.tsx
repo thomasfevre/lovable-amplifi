@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { NavLink } from "react-router-dom";
+import { ReactNode, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -16,6 +16,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { BecomeCreatorDialog } from "@/components/BecomeCreatorDialog";
 
 interface LayoutProps {
   children: ReactNode;
@@ -32,6 +33,8 @@ const navItems = [
 
 export const Layout = ({ children }: LayoutProps) => {
   const { ready, authenticated, user, login, logout } = usePrivy();
+  const navigate = useNavigate();
+  const [creatorDialogOpen, setCreatorDialogOpen] = useState(false);
 
   return (
     <div className="flex h-screen bg-background overflow-hidden">
@@ -98,12 +101,19 @@ export const Layout = ({ children }: LayoutProps) => {
 
         {/* Become a Creator CTA */}
         <div className="p-4 space-y-2">
-          <Button className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70">
+          <Button 
+            className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
+            onClick={() => setCreatorDialogOpen(true)}
+          >
             <Sparkles className="mr-2 h-4 w-4" />
             Become a Creator
           </Button>
           <Separator className="my-2" />
-          <Button variant="ghost" className="w-full justify-start">
+          <Button 
+            variant="ghost" 
+            className="w-full justify-start"
+            onClick={() => navigate("/settings")}
+          >
             <Settings className="mr-2 h-4 w-4" />
             Settings
           </Button>
@@ -122,6 +132,8 @@ export const Layout = ({ children }: LayoutProps) => {
 
       {/* Main Content */}
       <main className="flex-1 overflow-hidden">{children}</main>
+      
+      <BecomeCreatorDialog open={creatorDialogOpen} onOpenChange={setCreatorDialogOpen} />
     </div>
   );
 };

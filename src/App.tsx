@@ -20,7 +20,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <PrivyProvider
-    appId="cm63pmwh805m2p8kzilhj5yel"
+    appId="cmgkm4xot002xjo0c4f0uv4t7"
     config={privyConfig}
   >
     <QueryClientProvider client={queryClient}>

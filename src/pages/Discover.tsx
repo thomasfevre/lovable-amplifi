@@ -51,10 +51,10 @@ const Discover = () => {
   return (
     <Layout>
       <div className="h-full overflow-y-auto">
-        <div className="max-w-7xl mx-auto p-8 space-y-12">
+        <div className="max-w-7xl mx-auto p-4 md:p-8 space-y-8 md:space-y-12">
           {/* Featured Creators Carousel */}
           <section>
-            <h2 className="text-2xl font-bold mb-6">Featured Creators</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Featured Creators</h2>
             <Carousel className="w-full">
               <CarouselContent>
                 {creators.slice(0, 6).map((creator) => (
@@ -105,13 +105,13 @@ const Discover = () => {
 
           {/* Trending Creators Grid */}
           <section>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold">Trending Creators</h2>
-              <p className="text-sm text-muted-foreground">
+            <div className="flex items-center justify-between mb-4 md:mb-6">
+              <h2 className="text-xl md:text-2xl font-bold">Trending Creators</h2>
+              <p className="text-xs md:text-sm text-muted-foreground">
                 {filteredCreators.length} creators
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {filteredCreators.map((creator) => (
                 <CreatorCard
                   key={creator.id}

@@ -9,10 +9,10 @@ const Settings = () => {
   return (
     <Layout>
       <div className="h-full overflow-y-auto">
-        <div className="max-w-4xl mx-auto p-8 space-y-8">
-          <div className="flex items-center gap-3 mb-6">
-            <SettingsIcon className="h-8 w-8" />
-            <h1 className="text-3xl font-bold">Settings</h1>
+        <div className="max-w-4xl mx-auto p-4 md:p-8 space-y-6 md:space-y-8">
+          <div className="flex items-center gap-3 mb-4 md:mb-6">
+            <SettingsIcon className="h-6 w-6 md:h-8 md:w-8" />
+            <h1 className="text-2xl md:text-3xl font-bold">Settings</h1>
           </div>
 
           <Card>

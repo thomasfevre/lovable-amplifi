@@ -71,7 +71,7 @@ const CreatorProfile = () => {
     <Layout>
       <div className="h-full overflow-y-auto">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8 p-4 md:p-8">
             {/* Main Content Column */}
             <div className="lg:col-span-2 space-y-6">
               {/* Banner & Profile Header */}
@@ -85,19 +85,19 @@ const CreatorProfile = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
                 </div>
 
-                <div className="px-6 pb-6 -mt-16 relative">
-                  <Avatar className="h-32 w-32 border-4 border-card mb-4">
+                <div className="px-4 md:px-6 pb-4 md:pb-6 -mt-12 md:-mt-16 relative">
+                  <Avatar className="h-20 w-20 md:h-32 md:w-32 border-4 border-card mb-3 md:mb-4">
                     <AvatarImage src={creator.avatar} />
-                    <AvatarFallback className="bg-primary text-primary-foreground text-3xl">
+                    <AvatarFallback className="bg-primary text-primary-foreground text-xl md:text-3xl">
                       {creator.name.charAt(0)}
                     </AvatarFallback>
                   </Avatar>
 
                   <div className="flex items-start justify-between">
-                    <div className="space-y-3">
+                    <div className="space-y-2 md:space-y-3">
                       <div>
                         <div className="flex items-center gap-2 mb-1">
-                          <h1 className="text-3xl font-bold">{creator.name}</h1>
+                          <h1 className="text-xl md:text-3xl font-bold">{creator.name}</h1>
                           {creator.verified && (
                             <CheckCircle2 className="h-6 w-6 text-primary fill-primary" />
                           )}
@@ -109,27 +109,27 @@ const CreatorProfile = () => {
                       </div>
 
                       {/* Stats */}
-                      <div className="flex items-center gap-6 text-sm">
-                        <div className="flex items-center gap-2">
-                          <Users className="h-4 w-4 text-primary" />
+                      <div className="flex flex-wrap items-center gap-3 md:gap-6 text-xs md:text-sm">
+                        <div className="flex items-center gap-1.5 md:gap-2">
+                          <Users className="h-3 w-3 md:h-4 md:w-4 text-primary" />
                           <span className="font-semibold">{creator.holders}</span>
-                          <span className="text-muted-foreground">Holders</span>
+                          <span className="text-muted-foreground hidden sm:inline">Holders</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <DollarSign className="h-4 w-4 text-primary" />
+                        <div className="flex items-center gap-1.5 md:gap-2">
+                          <DollarSign className="h-3 w-3 md:h-4 md:w-4 text-primary" />
                           <span className="font-semibold">
                             ${(creator.marketCap / 1000).toFixed(0)}K
                           </span>
-                          <span className="text-muted-foreground">Market Cap</span>
+                          <span className="text-muted-foreground hidden sm:inline">Market Cap</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <FileText className="h-4 w-4 text-primary" />
+                        <div className="flex items-center gap-1.5 md:gap-2">
+                          <FileText className="h-3 w-3 md:h-4 md:w-4 text-primary" />
                           <span className="font-semibold">{creator.posts}</span>
-                          <span className="text-muted-foreground">Posts</span>
+                          <span className="text-muted-foreground hidden sm:inline">Posts</span>
                         </div>
                       </div>
 
-                      <p className="text-muted-foreground max-w-xl">{creator.bio}</p>
+                      <p className="text-sm md:text-base text-muted-foreground max-w-xl">{creator.bio}</p>
                     </div>
                   </div>
                 </div>
@@ -240,7 +240,7 @@ const CreatorProfile = () => {
 
             {/* Token Trading Panel */}
             <div id="trading-panel" className="lg:col-span-1">
-              <div className="sticky top-8">
+              <div className="lg:sticky lg:top-8">
                 <TokenTradingPanel
                   creator={creator}
                   userBalance={userBalance}

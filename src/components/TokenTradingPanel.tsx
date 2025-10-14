@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { Loader2, TrendingUp } from "lucide-react";
-import type { Creator } from "@/lib/mockData";
+import type { Creator } from "@/hooks/useCreators";
 
 interface TokenTradingPanelProps {
   creator: Creator;
@@ -29,7 +29,7 @@ export const TokenTradingPanel = ({
   const handleEthChange = (value: string) => {
     setEthAmount(value);
     if (value && !isNaN(parseFloat(value))) {
-      const tokens = (parseFloat(value) / creator.tokenPrice).toFixed(2);
+      const tokens = (parseFloat(value) / Number(creator.current_price)).toFixed(2);
       setTokenAmount(tokens);
     } else {
       setTokenAmount("");
@@ -39,7 +39,7 @@ export const TokenTradingPanel = ({
   const handleTokenChange = (value: string) => {
     setTokenAmount(value);
     if (value && !isNaN(parseFloat(value))) {
-      const eth = (parseFloat(value) * creator.tokenPrice).toFixed(4);
+      const eth = (parseFloat(value) * Number(creator.current_price)).toFixed(4);
       setEthAmount(eth);
     } else {
       setEthAmount("");
@@ -61,7 +61,7 @@ export const TokenTradingPanel = ({
     onTradeComplete(amount);
     
     toast.success(
-      `Transaction successful! ${amount} $${creator.tokenSymbol} added to your wallet.`
+      `Transaction successful! ${amount} $${creator.token_symbol} added to your wallet.`
     );
     
     setEthAmount("");
@@ -89,7 +89,7 @@ export const TokenTradingPanel = ({
     onTradeComplete(-amount);
     
     toast.success(
-      `Transaction successful! Sold ${amount} $${creator.tokenSymbol}.`
+      `Transaction successful! Sold ${amount} $${creator.token_symbol}.`
     );
     
     setEthAmount("");
@@ -107,10 +107,10 @@ export const TokenTradingPanel = ({
           </div>
           <h3 className="text-xl font-bold text-white">Become a Backer</h3>
           <p className="text-sm text-white/90">
-            Current Price: ${creator.tokenPrice.toFixed(2)} / ${creator.tokenSymbol}
+            Current Price: ${Number(creator.current_price).toFixed(2)} / ${creator.token_symbol}
           </p>
           <p className="text-xs text-white/70">
-            Hold tokens to unlock exclusive content and invest in {creator.name}'s growth
+            Hold tokens to unlock exclusive content and invest in {creator.profile?.display_name || creator.token_name}'s growth
           </p>
         </CardContent>
       </Card>
@@ -118,7 +118,7 @@ export const TokenTradingPanel = ({
       {/* Trading Interface */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Trade ${creator.tokenSymbol}</CardTitle>
+          <CardTitle className="text-lg">Trade ${creator.token_symbol}</CardTitle>
         </CardHeader>
         <CardContent>
           <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -141,7 +141,7 @@ export const TokenTradingPanel = ({
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="token-buy">Receive ${creator.tokenSymbol}</Label>
+                <Label htmlFor="token-buy">Receive ${creator.token_symbol}</Label>
                 <Input
                   id="token-buy"
                   type="number"
@@ -153,7 +153,7 @@ export const TokenTradingPanel = ({
               </div>
 
               <div className="text-xs text-muted-foreground">
-                Your Balance: {userBalance} ${creator.tokenSymbol}
+                Your Balance: {userBalance} ${creator.token_symbol}
               </div>
 
               <Button
@@ -167,14 +167,14 @@ export const TokenTradingPanel = ({
                     Processing...
                   </>
                 ) : (
-                  `Buy $${creator.tokenSymbol}`
+                  `Buy $${creator.token_symbol}`
                 )}
               </Button>
             </TabsContent>
 
             <TabsContent value="sell" className="space-y-4 pt-4">
               <div className="space-y-2">
-                <Label htmlFor="token-sell">Sell ${creator.tokenSymbol}</Label>
+                <Label htmlFor="token-sell">Sell ${creator.token_symbol}</Label>
                 <Input
                   id="token-sell"
                   type="number"
@@ -200,7 +200,7 @@ export const TokenTradingPanel = ({
               </div>
 
               <div className="text-xs text-muted-foreground">
-                Your Balance: {userBalance} ${creator.tokenSymbol}
+                Your Balance: {userBalance} ${creator.token_symbol}
               </div>
 
               <Button
@@ -215,7 +215,7 @@ export const TokenTradingPanel = ({
                     Processing...
                   </>
                 ) : (
-                  `Sell $${creator.tokenSymbol}`
+                  `Sell $${creator.token_symbol}`
                 )}
               </Button>
             </TabsContent>

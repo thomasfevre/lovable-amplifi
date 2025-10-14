@@ -11,6 +11,7 @@ import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useCreator } from "@/hooks/useCreators";
 import { usePosts } from "@/hooks/usePosts";
+import { useUserTokenBalance } from "@/hooks/useUserTokenBalance";
 import { CheckCircle2, Users, DollarSign, FileText, Lock } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 
@@ -19,9 +20,9 @@ const CreatorProfile = () => {
   const navigate = useNavigate();
   const { data: creator, isLoading: creatorLoading } = useCreator(id || "");
   const { data: allPosts = [] } = usePosts();
+  const { data: userBalance = 0 } = useUserTokenBalance(id || "");
   const creatorPosts = allPosts.filter((p) => p.creator.id === id);
 
-  const [userBalance] = useState(0); // TODO: Implement user balance tracking
   const [unlockModalOpen, setUnlockModalOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState<typeof allPosts[0] | null>(null);
   const [highlightTrading, setHighlightTrading] = useState(false);
